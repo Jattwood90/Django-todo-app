@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todo List</title>
+	<link rel="stylesheet" type="text/css" href="{%static 'css/todo.css'%}"/>
+</head>
+
+<body>
+
+	<div class="paper">
+		<section>
+			<h1 class='content pattern'>Things to do!</h1>
+			<i class="pin"></i>
+
+			<ul class="content pattern">
+				{% for todo_item in all_items %}
+					<li class="">{{ todo_item.content }}
+						<form action="/deleteTodo/{{todo_item.id}}" style="display: inline;"
+						method="post">{% csrf_token %}
+							<input type="image" src="{%static 'images/delete.png'%}" alt="submit" style='width: 15px;'/>
+							<label></label>
+						</form>
+					</li>
+				{% endfor %}
+			</ul>
+
+			<form action="/addTodo/" method="post">{% csrf_token %}
+				<input type="text" name="content"/>
+				<input type="image" src="{%static 'images/add.png'%}" alt="submit" style='width: 15px;'/>
+			</form>
+		</section>
+	</div>
+</body>
+</html>
+
